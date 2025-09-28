@@ -38,7 +38,7 @@ jobs:
           action: "upload"
           app_location: "./event-frontend"         
           api_location: ""                       
-          output_location: "dist/event-frontend" # Angular build output
+          output_location: "dist/event-frontend/browser" # Angular build output
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
