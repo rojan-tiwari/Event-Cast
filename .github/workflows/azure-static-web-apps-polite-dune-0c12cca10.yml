@@ -24,20 +24,22 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: event-frontend   
 
       - name: Build Angular app
         run: npm run build --if-present
+        working-directory: event-frontend   
 
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
-        with:   # 👈 all inputs MUST be under this
+        with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_POLITE_DUNE_0C12CCA10 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "./event-frontend"                   # root of Angular project
-          api_location: ""                    # no backend yet
+          app_location: "event-frontend"         
+          api_location: ""                       
           output_location: "dist/event-frontend" # Angular build output
-          
+
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
@@ -46,6 +48,6 @@ jobs:
       - name: Close Pull Request
         uses: Azure/static-web-apps-deploy@v1
         with:
-          app_location: "./event-frontend"  
+          app_location: "event-frontend"
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_POLITE_DUNE_0C12CCA10 }}
           action: "close"
