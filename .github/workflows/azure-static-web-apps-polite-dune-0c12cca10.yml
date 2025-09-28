@@ -27,7 +27,7 @@ jobs:
         working-directory: event-frontend   
 
       - name: Build Angular app
-        run: npm run build --if-present
+        run: npm run build -- --configuration=production
         working-directory: event-frontend   
 
       - name: Deploy to Azure Static Web Apps
